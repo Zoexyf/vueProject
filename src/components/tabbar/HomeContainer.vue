@@ -11,9 +11,9 @@
      </mt-swipe>
         <!-- 九宫格到六宫格的改造 -->
      <ul class="mui-table-view mui-grid-view mui-grid-9">
-		<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+		<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/newslist">
 		         <img src="../../images/men1.png" alt="">
-		         <div class="mui-media-body">新闻资讯</div></a> </li>
+		         <div class="mui-media-body">新闻资讯</div></router-link> </li>
 		<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
 		          <img src="../../images/men2.png" alt="">
 		         <div class="mui-media-body">图片分享</div></a></li>
@@ -56,8 +56,8 @@ export default {
         getLunbotu(){
             //获取轮播图的方法
             this.$http.get('https://www.easy-mock.com/mock/5d171ce3a31bc21d4c4376aa/vue.studyit.io/api/getlunbo').then(result=>{
-                console.log(result.body)
-                console.log(result.body.status)
+                // console.log(result.body)
+                // console.log(result.body.status)
 
                 if(result.body){
                     //成功了

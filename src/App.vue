@@ -31,7 +31,7 @@
 		</nav>
 
 
-    <h1>123</h1>
+    <!-- <h1>123</h1> -->
   </div>
 
 </template>
@@ -45,6 +45,7 @@
 .app-container{
   padding-top: 40px;
   overflow: hidden;
+  padding-bottom: 50px;
 }
 
 .v-enter{

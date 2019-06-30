@@ -12,16 +12,25 @@ import './lib/mui/css/icons-extra.css'
 //导入mint-ui（Header部所使用）
 import { Header } from 'mint-ui'
 Vue.component(Header.name, Header)
-
 //导入mint-ui(轮播图)
 import { Swipe, SwipeItem } from 'mint-ui';
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+//导入mint-ui（Button）
+import { Button } from 'mint-ui';
+Vue.component(Button.name, Button);
 
 //S.1导入vue-resource
 import VueResource from 'vue-resource'
 //S.2 安装vue-resource
 Vue.use(VueResource)
+
+//导入格式化时间插件
+import moment from 'moment'
+//定义全局过滤器--时间格式化
+Vue.filter('dateFormat',function(dataStr,pattern="YYYY-MM-DD HH:MM"){
+   return  moment(dataStr).format(pattern)
+})
 
 //R.1导入路由的包 
 import VueRouter from 'vue-router'
