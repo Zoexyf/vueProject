@@ -60,5 +60,62 @@
 4. 将注册子组件时候的，注册名称，以标签形式 在页面中引用即可
 
 ## 获取所有的评论数据显示到页面中
+getComments
 
 ## 实现点击加载更多按钮
+1. 为加载更多按钮绑定点击事件，在事件中去请求下一页数据
+2. 点击加载更多，让pageIndex++,然后重新盗用 this .getComments()方法
+3. 为了防止新数据覆盖老数据，在点击加载更多的时候，每当获取到新数据，应该让老数据调用数组的concat 方法，拼接上新数组
+
+## 发表评论
+1. 将文本框做双向数据绑定
+2. 为发表按钮绑定一个事件
+3. 校验评论是否为空，如果为空，则Toast提示用户 评论内容不能为空
+4. 通过vue-router将提交的评论内容提交给服务器
+5. 当发表评论OK后，重新刷新列表，以查看最新的评论
+ + 如果调用getComments方法重新刷新评论列表的话，可能只能得到最后一页的评论，前几页的评论获取不到
+ + 所以可以选择这种方法：当评论成功后，在客户端，手动拼接处一个最新的评论对象，然后 调用 数组的unshift方法，把最新的评论，追加到data 中comments的开头，这样就能实现刷新评论列表的需求
+ 6. 使用post方法请求,注意三个参数==》
+ + 参数1：请求的URL地址；参数2：提交给服务器的数据对象{title:this.msg}
+ + 参数3：定义提交时候，表单中数据的格式{emulateJSON:true} 该参数可在main.js中全局配置 `Vue.http.options.emulateJSON =true`
+ 7. 通过路由获取url的id `this.$route.params.id`
+ 8. 一个未完成的需求（评论加载更多，有关pageIndex的JSON格式不清楚，调用的数据接口现在还无法实现）
+
+ # 图片分享 
+
+ ## 创建路由组件 
+   1. 将a链接改为 router-link to="/home/photolist",创建photolist.vue组件模板结构
+   2. 添加router.js中的路由指向，并显示最定的组件页面
+## 绘制图片列表，组件页面结构，并美化样式
+1. 制作顶部的滑动条
+ + 导入MUI的组件tab-top-webview-main.html，发现页面从顶部开始，因为主顶部栏在APP.vue中以及设定好，不应该存在定位问题，之后检查发现，该组件还定义了一种全屏的类fullscreen，删除即可
+ + 滑动条无法正常触发，通过查看官方文档，发现这是JS组件，需要被初始化，解决方法： 导入mui.js，调用官方提供的方式进行初始化(http://dev.dcloud.net.cn/mui/ui/#scroll)
+  ```
+  mui('.mui-scroll-wrapper').scroll({
+	deceleration: 0.0005 //flick 减速系数，系数越大，滚动速度越慢，滚动距离越小，默认值0.0006
+  });
+  ```
+  + 由于mui引入会与webpack冲突，导致无用包的引入，系统报错，采用去掉webpack严格模式的方法解决该问题，（改掉mui中的不严格代码也可以实现，但不现实）
+    - 安装包 `npm install babel-plugin-transform-remove-strict-mode`
+    - 给 `.babelrc`中添加`"plugins": ["transform-remove-strict-mode"]`
+
+  + 滑动实现后会报警告，只需要给全局加一个样式 touch-action 启用用户操作（提高滑动流畅度,谷歌自己支持）
+  + 滑动实现后需要进行二次刷新才能出现滑动效果，原因：如果要初始化滑动条必须要等待DOM元素加载完成 将初始化代码放置到 mounted函数 中即可解决（Vue函数生命周期需要再深刻理解一下）
+  + 当滑动条调试完成后，发现tabber不能正常工作，解决方法 将每个tabber中的`mui-tab-item`重新改一下名字，并且将之前的样式重新拷贝为新类名的属性
+
+2. 获取图片列表的类别，并渲染
+  + 首先手动拼接出一个完整的分类列表，表示全部 id==0
+  + 渲染的时候，选中高亮的效果消失，可双向绑定使用三元表达是来设计
+  `<a :class="['mui-control-item',item.id==0?'mui-active':'']" v-for="item in cates" :key="item.id">`
+ 
+### 制作图片列表
+1. 图片列表需要使用 懒加载技术 ，使用 Mint-UI 提供的现成的组件`lazy load`
+2. 根据 lazy load的使用文档进行使用（http://mint-ui.github.io/docs/#/en2/lazyload）
+3. 渲染列表数据
+  + 渲染完成后上拖发现会盖住顶部，直接将顶部的z-index改大
+  + 渲染完成后改造每个图片的路由，发现改造完后 原li发生变化 解决方法是给li改后的router-link 加一个 tag="li",指定标签类型，才不会失去之前的渲染属性
+
+## 实现图片详情页面
+
+
+

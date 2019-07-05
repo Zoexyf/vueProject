@@ -9,16 +9,26 @@ import './lib/mui/css/icons-extra.css'
 
 
 
-//导入mint-ui（Header部所使用）
-import { Header } from 'mint-ui'
-Vue.component(Header.name, Header)
-//导入mint-ui(轮播图)
-import { Swipe, SwipeItem } from 'mint-ui';
-Vue.component(Swipe.name, Swipe);
-Vue.component(SwipeItem.name, SwipeItem);
-//导入mint-ui（Button）
-import { Button } from 'mint-ui';
-Vue.component(Button.name, Button);
+// //导入mint-ui（Header部所使用）
+// import { Header } from 'mint-ui'
+// Vue.component(Header.name, Header)
+// //导入mint-ui(轮播图)
+// import { Swipe, SwipeItem } from 'mint-ui';
+// Vue.component(Swipe.name, Swipe);
+// Vue.component(SwipeItem.name, SwipeItem);
+// //导入mint-ui（Button）
+// import { Button } from 'mint-ui';
+// Vue.component(Button.name, Button);
+// //导入mint-ui（lazy load）
+// import { Lazyload } from 'mint-ui';
+// Vue.use(Lazyload);
+
+//将按需导入变为全部导入
+
+import MintUI from 'mint-ui'
+Vue.use(MintUI)
+import 'mint-ui/lib/style.css'
+
 
 //S.1导入vue-resource
 import VueResource from 'vue-resource'
@@ -38,6 +48,29 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 //R.3导入自己的router.js路由模块
 import router from './router.js'
+
+//设置请求的根路径
+// Vue.http.options.root='https://www.easy-mock.com/mock/5d171ce3a31bc21d4c4376aa/vue.studyit.io'
+
+//全局设置post时候表单数据格式组织形式： application/x-www-form-urlencoded
+Vue.http.options.emulateJSON =true
+
+//安装图片预览插件
+import VuePreview from 'vue-preview'
+
+// defalut install
+Vue.use(VuePreview)
+// with parameters install
+// Vue.use(preview, {
+//   mainClass: 'pswp--minimal--dark',
+//   barsSize: {top: 0, bottom: 0},
+//   captionEl: false,
+//   fullscreenEl: false,
+//   shareEl: false,
+//   bgOpacity: 0.85,
+//   tapToClose: true,
+//   tapToToggleControls: false
+// })
 
 var vm=new Vue({
 
