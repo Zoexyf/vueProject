@@ -115,7 +115,42 @@ getComments
   + 渲染完成后上拖发现会盖住顶部，直接将顶部的z-index改大
   + 渲染完成后改造每个图片的路由，发现改造完后 原li发生变化 解决方法是给li改后的router-link 加一个 tag="li",指定标签类型，才不会失去之前的渲染属性
 
-## 实现图片详情页面
+## 实现图片详情页面(未实现此功能)
+1. 使用vue-preview这个略缩图插件
+2. 获取所有的图片列表 然后用 v-for 指令渲染数据
+3. 注意: img 标签上的class不能去掉
+4. 注意： 每个 图片数据对象中 ，必须有width和height 属性
+
+## 绘制 商品列表，页面基本结构并美化
+1. 实现经典两列布局
+
+flex-wrap (适用于父类容器上) 设置或检索伸缩盒对象的子元素超出父容器时是否换行。
+
+
+## 在手机上进行项目预览和测试
+1. 保证手机和电脑处于同一个WiFi，也就是手机可以访问到电脑的IP
+2. 打开项目中 package.json 文件，在dev脚本中添加一个 --host 指令，把当前电脑 WiFi IP地址，设置为 --host 的指令值
+  + 查看自己电脑所处的 WiFi的ip呢，在cmd 终端中运行 `ipconfig`，查看 那个的 ip 地址
+  
 
 
 
+### 一些小点
+
+1. data 是往自己组件内部，挂载一些私有的组件
+2. 网页中两种跳转方式
+  + 方式1，标签跳转
+  + 方式2，使用window.location.herf 的形式，叫做编程式导航
+  + 使用JS的形式进行路由导航
+    - 注意： 一定要区分 this.$route 和 this.$router 这两个对象，
+    - 其中： this.$route 是路由【参数对象】，所有路由中的参数， params, query 都属于它
+    - 其中： this.$router 是一个路由【导航对象】，用它 可以方便的 使用 JS 代码，实现路由的 前进、后退、 跳转到新的 URL 地址
+      ```
+      console.log(this);
+      // 1. 最简单的
+      // this.$router.push("/home/goodsinfo/" + id);
+      // 2. 传递对象
+      // this.$router.push({ path: "/home/goodsinfo/" + id });
+      // 3. 传递命名的路由
+      this.$router.push({ name: "goodsinfo", params: { id } });
+      ```
