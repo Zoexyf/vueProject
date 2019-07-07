@@ -3,6 +3,10 @@
 import Vue from 'vue'
 import app from './App.vue'
 
+// 注册 vuex
+// import Vuex from 'vuex'
+// Vue.use(Vuex)
+
 //导入图标的 Css 样式，并要拷贝拓展字体库 ttf 文件
 import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
