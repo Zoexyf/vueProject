@@ -2,14 +2,14 @@
     <mt-swipe :auto="4000">
         <!-- 将来谁使用这个轮播图组件，谁为我们传递这个lunbotulist ,此时，应该是父组件向子组件传值-->
          <mt-swipe-item v-for="item in lunbotuList" :key="item.id">
-             <img :src="item.fImgUrl" alt="">
+             <img :src="item.fImgUrl" alt="" :class="{'full':isfull }">
          </mt-swipe-item>
      </mt-swipe>
 </template>
 
 <script>
 export default {
-    props:["lunbotuList"]
+    props:["lunbotuList","isfull"]
     
 }
 </script>
@@ -31,9 +31,13 @@ export default {
 
 
          img{
-             width: 100%;
+            // width: 100%;
              height: 100%;
+             
          }
+         .full{
+                 width: 100%;
+             }
      }
 
 }

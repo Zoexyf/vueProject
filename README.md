@@ -111,7 +111,9 @@ getComments
 ### 制作图片列表
 1. 图片列表需要使用 懒加载技术 ，使用 Mint-UI 提供的现成的组件`lazy load`
 2. 根据 lazy load的使用文档进行使用（http://mint-ui.github.io/docs/#/en2/lazyload）
-3. 渲染列表数据
+3. 渲染列表数据.full{
+                 width: 100%;
+             }
   + 渲染完成后上拖发现会盖住顶部，直接将顶部的z-index改大
   + 渲染完成后改造每个图片的路由，发现改造完后 原li发生变化 解决方法是给li改后的router-link 加一个 tag="li",指定标签类型，才不会失去之前的渲染属性
 
@@ -154,3 +156,7 @@ flex-wrap (适用于父类容器上) 设置或检索伸缩盒对象的子元素�
       // 3. 传递命名的路由
       this.$router.push({ name: "goodsinfo", params: { id } });
       ```
+  2. 对轮播图进行抽离封装
+    + 将原轮播图的 HTML结构 与CSS属性，全部剪切到自定义的swiper组件中
+    + 子组件通过`props:["lunbotuList"]`将自己暴露给父组件
+    + 父组件引入`import swiper from '../subcomponents/swiper.vue'`,在js代码中，接收`components:{swiper}`，在methods定义lunbotuList方法,并在data中 return 轮播图数组，通过绑定` <swiper :lunbotuList="lunbotuList"> </swiper>`接收
